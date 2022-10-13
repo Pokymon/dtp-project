@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StudentsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,6 @@ require __DIR__.'/auth.php';
 Route::get('/user', function () {
     return view('user');
 });
+
+Route::get('students', [StudentsController::class, 'index']);
+Route::get('students/edit', [StudentsController::class, 'edit']);
