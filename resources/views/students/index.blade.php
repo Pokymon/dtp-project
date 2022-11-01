@@ -3,6 +3,9 @@
 <div class="card">
     <div class="card-body">
         <div class="col-12">
+            <div class="mb-3">
+                <a href="students/create"><input href="" type="button" value="Create new" class="btn btn-primary"></a>            
+            </div>
             <div class="card">
               <div class="table-responsive">
                 <table class="table table-vcenter card-table">

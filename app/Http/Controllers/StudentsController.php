@@ -18,4 +18,20 @@ class StudentsController extends Controller
     {
         return view('students.edit');
     }
+
+    public function create()
+    {
+        return view('students.create');
+    }
+
+    public function store(Request $request)
+    {
+        $student = new Student();
+        $student->name = $request->name;
+        $student->phone_number = $request->phone_number;
+        $student->address = $request->address;
+        $student->class = $request->class;
+        $student->save();
+        return back();
+    }
 }
