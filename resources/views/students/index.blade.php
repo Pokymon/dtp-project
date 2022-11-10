@@ -3,6 +3,11 @@
 <div class="card">
     <div class="card-body">
         <div class="col-12">
+            @if (session('success'))
+            <div class="alert alert-info" role="alert">
+                {{ session('success') }}
+            </div>
+            @endif
             <div class="mb-3">
                 <a href="{{ route('students.create') }}"><input href="" type="button" value="Create new" class="btn btn-primary"></a>            
             </div>

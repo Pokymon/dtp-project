@@ -46,7 +46,7 @@ class StudentController extends Controller
             'address' => $address,
             'class' => $class
         ]);
-        return redirect()->route('students.index');
+        return redirect()->route('students.index')->with('success', 'Student created successfully.');
     }
 
     /**
@@ -91,7 +91,7 @@ class StudentController extends Controller
             'address' => $address,
             'class' => $class
         ]);
-        return redirect()->route('students.index');
+        return redirect()->route('students.index')->with('success', 'Student updated successfully.');
     }
 
     /**
@@ -103,6 +103,6 @@ class StudentController extends Controller
     public function destroy($id)
     {
         $student = Student::destroy($id);
-        return redirect()->route('students.index');
+        return redirect()->route('students.index')->with('success', 'Student deleted successfully.');
     }
 }
