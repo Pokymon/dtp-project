@@ -6,19 +6,31 @@
             @csrf
             <div class="mb-3">
                 <label class="form-label">Name</label>
-                <input type="text" class="form-control" name="name" placeholder="Input name">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Input name" value="{{ old('name') }}">
+                @error('name')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label class="form-label">Phone</label>
-                <input type="text" class="form-control" name="phone_number" placeholder="Input phone">
+                <input type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" placeholder="Input phone" value="{{ old('phone_number') }}">
+                @error('phone_number')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label class="form-label">Address</label>
-                <input type="text" class="form-control" name="address" placeholder="Input address">
+                <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" placeholder="Input address" value="{{ old('address') }}">
+                @error('address')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label class="form-label">Class</label>
-                <input type="text" class="form-control" name="class" placeholder="Input class">
+                <input type="text" class="form-control @error('class') is-invalid @enderror" name="class" placeholder="Input class" value="{{ old('class') }}">
+                @error('class')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <input type="submit" value="Save" class="btn btn-primary">
