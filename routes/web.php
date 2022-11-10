@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,10 +22,7 @@ Route::get('/user', function () {
     return view('user');
 });
 
-Route::get('/students', [StudentsController::class, 'index'])->name('students.index');
-Route::get('/students/edit', [StudentsController::class, 'edit'])->name('students.edit');
-Route::get('/students/create', [StudentsController::class, 'create'])->name('students.create');
-Route::post('/students', [StudentsController::class, 'store'])->name('students.store');
+Route::resource('/students', StudentController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

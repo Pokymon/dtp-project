@@ -24,7 +24,7 @@
                 <input type="submit" value="Save" class="btn btn-primary">
             </div>
             <div class="mb-3">
-                <a href="/students"><input type="button" value="Cancel" class="btn btn-primary"></a>
+                <a href="{{ route('students.index') }}"><input type="button" value="Cancel" class="btn btn-primary"></a>
             </div>
         </form>
     </div>
