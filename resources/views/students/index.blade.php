@@ -19,7 +19,7 @@
             </div>
             @endif
             <div class="mb-3">
-                <a href="{{ route('students.create') }}"><input href="" type="button" value="Create new" class="btn btn-primary"></a>            
+                <a href="{{ route('students.create') }}"><input href="" type="button" value="Create new" class="btn btn-primary"></a>
             </div>
             <div class="card">
               <div class="table-responsive">
@@ -30,6 +30,7 @@
                       <th>Phone</th>
                       <th>Address</th>
                       <th>Class</th>
+                      <th>Photo</th>
                       <th>Edit</th>
                       <th class="w-1"></th>
                     </tr>
@@ -48,6 +49,9 @@
                         {{ $student->class }}
                       </td>
                       <td>
+                        <img src="{{ asset('storage/'.$student->photo) }}" alt="" width="100px">
+                      </td>
+                      <td>
                         <a href="{{ route('students.edit', $student->id) }}"><input type="button" value="Edit" class="btn btn-primary"></a>
                         <br>
                         <form action="{{ route('students.destroy', $student->id) }}" method="post">
@@ -60,6 +64,11 @@
                   @endforeach
                   </tbody>
                 </table>
+              </div>
+              <div class="card-footer">
+                {{ $students->links(
+                    'pagination::bootstrap-4'
+                ) }}
               </div>
             </div>
           </div>

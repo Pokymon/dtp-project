@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('students.store') }}" method="post">
+        <form action="{{ route('students.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label class="form-label">Name</label>
@@ -29,6 +29,13 @@
                 <label class="form-label">Class</label>
                 <input type="text" class="form-control @error('class') is-invalid @enderror" name="class" placeholder="Input class" value="{{ old('class') }}">
                 @error('class')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Photo</label>
+                <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" placeholder="Input photo" value="{{ old('photo') }}">
+                @error('photo')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>

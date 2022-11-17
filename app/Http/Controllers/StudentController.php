@@ -14,7 +14,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        $students = Student::latest()->paginate(5);
         return view('students.index', compact('students'));
     }
 
@@ -46,11 +46,16 @@ class StudentController extends Controller
         $phone_number = $request->phone_number;
         $address = $request->address;
         $class = $request->class;
+        $photoPath = '';
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos');
+        }
         Student::create([
             'name' => $name,
             'phone_number' => $phone_number,
             'address' => $address,
-            'class' => $class
+            'class' => $class,
+            'photo' => $photoPath,
         ]);
         return redirect()->route('students.index')->with('success', 'Student created successfully.');
     }
@@ -97,11 +102,16 @@ class StudentController extends Controller
         $phone_number = $request->phone_number;
         $address = $request->address;
         $class = $request->class;
+        $photoPath = '';
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos');
+        }
         Student::find($id)->update([
             'name' => $name,
             'phone_number' => $phone_number,
             'address' => $address,
-            'class' => $class
+            'class' => $class,
+            'photo' => $photoPath,
         ]);
         return redirect()->route('students.index')->with('success', 'Student updated successfully.');
     }

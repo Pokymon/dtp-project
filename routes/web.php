@@ -22,7 +22,7 @@ Route::get('/user', function () {
     return view('user');
 });
 
-Route::resource('/students', StudentController::class);
+Route::resource('/students', StudentController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
