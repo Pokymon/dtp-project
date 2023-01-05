@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -37,7 +39,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'min:3','max:255'],
+            'name' => ['required', 'string', 'min:3', 'max:255'],
             'phone_number' => ['required', 'numeric'],
             'address' => ['required', 'string', 'max:255'],
             'class' => ['required', 'string', 'max:255'],
@@ -68,7 +70,13 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $achievements = DB::table('achievements')
+            ->join('students', 'students.id', '=', 'achievements.student_id')
+            ->where('achievements.student_id', '=', $id)
+            ->select('students.name as student_name', 'students.id as student_id', 'achievements.*')
+            ->get();
+
+        return $achievements;
     }
 
     /**
@@ -93,7 +101,7 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => ['required', 'string', 'min:3','max:255'],
+            'name' => ['required', 'string', 'min:3', 'max:255'],
             'phone_number' => ['required', 'numeric'],
             'address' => ['required', 'string', 'max:255'],
             'class' => ['required', 'string', 'max:255'],
@@ -104,6 +112,9 @@ class StudentController extends Controller
         $class = $request->class;
         $photoPath = '';
         if ($request->hasFile('photo')) {
+            if (Student::find($id)->photo) {
+                Storage::delete(Student::find($id)->photo);
+            }
             $photoPath = $request->file('photo')->store('photos');
         }
         Student::find($id)->update([
@@ -124,6 +135,9 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
+        if (Student::find($id)->photo) {
+            Storage::delete(Student::find($id)->photo);
+        }
         $student = Student::destroy($id);
         return redirect()->route('students.index')->with('success', 'Student deleted successfully.');
     }
